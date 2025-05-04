@@ -19,6 +19,11 @@ public class LibroController {
         return libroService.getLibros();
     }
 
+    @PostMapping
+    public Libro agregarLibro(@RequestBody Libro libro) {
+        return libroService.saveLibro(libro);
+    }
+
     @GetMapping("{id}")
     public Libro buscarLibro(@PathVariable int id){
         return libroService.getLibroId(id);
@@ -34,5 +39,6 @@ public class LibroController {
     public String eliminarLibro(@PathVariable int id){
          return libroService.deleteLibro(id);
     }
+
 
 }
