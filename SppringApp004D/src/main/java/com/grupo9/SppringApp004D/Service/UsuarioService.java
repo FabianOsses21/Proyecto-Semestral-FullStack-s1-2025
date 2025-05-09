@@ -17,7 +17,8 @@ public class UsuarioService {
     }
 
     public String deleteUsuario(int id){
-        return usuarioRepository.removeUsuario(id);
+        usuarioRepository.removeUsuario(id);
+        return "Usuario eliminado";
     }
 
     public String getAllUsuarios(){
