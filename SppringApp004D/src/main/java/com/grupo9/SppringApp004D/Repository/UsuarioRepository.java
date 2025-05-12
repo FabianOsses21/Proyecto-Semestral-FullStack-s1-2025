@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public class UsuarioRepository {
 
-    private List<Usuario> listaUsuarios = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public UsuarioRepository() {
 
@@ -16,7 +16,7 @@ public class UsuarioRepository {
 
     public String getAllUsuarios() {
         String output = " ";
-        for (Usuario temp: listaUsuarios) {
+        for (Usuario temp: usuarios) {
             output += "Id del usuario: " + temp.getId() + "\n";
             output += "Nombre del usuario: " + temp.getNombre() + "\n";
             output += "password del usuario: " + temp.getPassword() + "\n";
@@ -32,7 +32,7 @@ public class UsuarioRepository {
 
     public String getUsuario(int id) {
         String output = "";
-        for (Usuario temp: listaUsuarios) {
+        for (Usuario temp: usuarios) {
             if (temp.getId() == id) {
                 output = "Id del usuario: " + temp.getId() + "\n";
                 output += "Nombre del usuario: " + temp.getNombre() + "\n";
@@ -46,14 +46,14 @@ public class UsuarioRepository {
 
     //Agregar usuario
     public String addUsuario(Usuario usuario) {
-        listaUsuarios.add(usuario);
+        usuarios.add(usuario);
         return "Usuario agregado con exito!";
     }
 
     public String removeUsuario(int id) {
-        for (Usuario temp: listaUsuarios) {
+        for (Usuario temp: usuarios) {
             if (temp.getId() == id) {
-                listaUsuarios.remove(temp);
+                usuarios.remove(temp);
                 return "Usuario eliminado con exito!";
             }
         }
@@ -62,16 +62,16 @@ public class UsuarioRepository {
 
     public String updateUsuario(int id, Usuario usuario) {
         int index =0;
-        for (Usuario temp: listaUsuarios) {
+        for (Usuario temp: usuarios) {
             if (temp.getId() == id) {
 
-                index= listaUsuarios.indexOf(temp);
+                index= usuarios.indexOf(temp);
             }
         }
         if (index == -1) {
             return "No existe el usuario";
         }else{
-            listaUsuarios.set(index, usuario);
+            usuarios.set(index, usuario);
             return "Usuario actualizado con exito!";
         }
     }
