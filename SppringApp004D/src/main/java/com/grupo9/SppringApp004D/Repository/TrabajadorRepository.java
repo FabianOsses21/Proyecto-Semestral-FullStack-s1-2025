@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class TrabajadorRepository {
 
-    private List<Trabajador> listaTrabajadores = new ArrayList<>();
+    private List<Trabajador> trabajadors = new ArrayList<>();
 
     public TrabajadorRepository() {
 
@@ -18,13 +18,13 @@ public class TrabajadorRepository {
 
     public String getAllTrabajadores() {
         String output = "";
-        for (Trabajador temp : listaTrabajadores) {
-            output += "Id del trabajador" + temp.getId() + "\n";
-            output += "Nombre del trabajador" + temp.getNombre() + "\n";
-            output += "Apellido del trabajador" + temp.getApellido() + "\n";
-            output += "Email del trabajador" + temp.getEmail() + "\n";
-            output += "Rol del trabajador" + temp.getRol() + "\n";
-            output += "Tienda del trabajador" + temp.getTienda() + "\n";
+        for (Trabajador temp : trabajadors) {
+            output += "Id del trabajador: " + temp.getId() + "\n";
+            output += "Nombre del trabajador: " + temp.getNombre() + "\n";
+            output += "Apellido del trabajador: " + temp.getApellido() + "\n";
+            output += "Email del trabajador: " + temp.getEmail() + "\n";
+            output += "Rol del trabajador: " + temp.getRol() + "\n";
+            output += "Tienda del trabajador: " + temp.getTienda() + "\n";
         }
         if(output.isEmpty()){
             return "No se encontro el trabajador";
@@ -37,14 +37,14 @@ public class TrabajadorRepository {
 
     public String getTrabajador(int id) {
         String output = "";
-        for (Trabajador temp : listaTrabajadores) {
+        for (Trabajador temp : trabajadors) {
             if (temp.getId() == id) {
-                output += "Id del trabajador" + temp.getId() + "\n";
-                output += "Nombre del trabajador" + temp.getNombre() + "\n";
-                output += "Apellido del trabajador" + temp.getApellido() + "\n";
-                output += "Email del trabajador" + temp.getEmail() + "\n";
-                output += "Rol del trabajador" + temp.getRol() + "\n";
-                output += "Tienda del trabajador" + temp.getTienda() + "\n";
+                output += "Id del trabajador " + temp.getId() + "\n";
+                output += "Nombre del trabajador " + temp.getNombre() + "\n";
+                output += "Apellido del trabajador " + temp.getApellido() + "\n";
+                output += "Email del trabajador " + temp.getEmail() + "\n";
+                output += "Rol del trabajador " + temp.getRol() + "\n";
+                output += "Tienda del trabajador " + temp.getTienda() + "\n";
                 return output;
             }
         }
@@ -53,30 +53,31 @@ public class TrabajadorRepository {
 
     //Agregar trabajador
     public String addTrabajador(Trabajador trabajador) {
-        listaTrabajadores.add(trabajador);
+        trabajadors.add(trabajador);
         return "Trabajador agregado con existo!";
     }
 
     public String removeTrabajador(int id) {
-        for (Trabajador temp : listaTrabajadores) {
+        for (Trabajador temp : trabajadors) {
             if (temp.getId() == id) {
-                listaTrabajadores.remove(temp);
+                trabajadors.remove(temp);
                 return "Trabajador eliminado";
             }
         }
+        return "No existe el trabajador";
     }
 
     public String updateTrabajador(int id, Trabajador trabajador) {
         int index = 0;
-        for (Trabajador temp : listaTrabajadores) {
+        for (Trabajador temp : trabajadors) {
             if (temp.getId() == id) {
-                index = listaTrabajadores.indexOf(temp);
+                index = trabajadors.indexOf(temp);
             }
         }
         if (index != -1) {
             return "No existe el trabajador con id: " +id;
         }else{
-            listaTrabajadores.set(index, trabajador);
+            trabajadors.set(index, trabajador);
             return "Trabajador actualizado con exito!";
         }
     }
