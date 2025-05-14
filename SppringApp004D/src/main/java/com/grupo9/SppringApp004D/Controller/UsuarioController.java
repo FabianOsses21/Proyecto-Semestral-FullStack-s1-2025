@@ -15,21 +15,25 @@ public class UsuarioController {
 
     @GetMapping
     public String getAllUsuarios(){
+
         return usuarioService.getAllUsuarios();
     }
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable int id){
+
         return usuarioService.getUserById(id);
     }
 
     @PostMapping
     public String addUser(@RequestBody Usuario usuario){
+
         return usuarioService.addUsuario(usuario);
     }
 
     @DeleteMapping("/{id}")
     public String deleteUserById(@PathVariable int id){
+
         return usuarioService.deleteUsuario(id);
     }
 
