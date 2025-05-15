@@ -12,4 +12,5 @@ public class Inventario {
     private int idTienda;
     private int cantidad;
     private String fechaActualizacion;
+
 }

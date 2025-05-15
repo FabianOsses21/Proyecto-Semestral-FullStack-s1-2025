@@ -45,5 +45,4 @@ public class InventarioController {
         return inventarioService.deleteInventario(idProducto, idTienda);
     }
 
-
 }

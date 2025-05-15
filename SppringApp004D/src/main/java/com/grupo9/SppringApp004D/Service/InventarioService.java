@@ -30,4 +30,5 @@ public class InventarioService {
     public String getInventarioByProducto(int idProducto) {
         return inventarioRepository.getInventarioByProducto(idProducto);
     }
+
 }
