@@ -23,7 +23,7 @@ public class UsuarioRepository {
             output += "email del usuario: " + temp.getEmail() + "\n";
         }
         if(output.isEmpty()){
-            return "No existe el usuario";
+            return "No se encontraron usuarios";
         }
         else {
             return output;

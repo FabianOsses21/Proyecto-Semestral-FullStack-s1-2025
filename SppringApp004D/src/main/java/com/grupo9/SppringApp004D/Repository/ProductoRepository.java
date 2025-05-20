@@ -21,11 +21,10 @@ public class ProductoRepository {
             output += "Id del producto: " + temp.getId() + "\n";
             output += "Nombre del producto: " + temp.getNombre() + "\n";
             output += "Descripcion del producto: " + temp.getDescripcion() + "\n";
-            output += "Cantidad del producto: " + temp.getCantidad() + "\n";
             output += "Precio del producto: " + temp.getPrecio() + "\n";
         }
         if(output.isEmpty()){
-            return "No existe el producto con id: "+id;
+            return "No existen productos";
         }
         else{
             return output;
@@ -39,7 +38,6 @@ public class ProductoRepository {
                 output += "Id del producto: " + temp.getId() + "\n";
                 output += "Nombre del producto: " + temp.getNombre() + "\n";
                 output += "Descripcion del producto: " + temp.getDescripcion() + "\n";
-                output += "Cantidad del producto: " + temp.getCantidad() + "\n";
                 output += "Precio del producto: " + temp.getPrecio() + "\n";
                 return output;
             }
