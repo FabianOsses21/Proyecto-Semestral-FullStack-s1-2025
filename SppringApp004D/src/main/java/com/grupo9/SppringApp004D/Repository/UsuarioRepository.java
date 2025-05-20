@@ -21,6 +21,7 @@ public class UsuarioRepository {
             output += "Nombre del usuario: " + temp.getNombre() + "\n";
             output += "password del usuario: " + temp.getPassword() + "\n";
             output += "email del usuario: " + temp.getEmail() + "\n";
+            output += "direccion del usuario: " + temp.getDireccion() + "\n";
         }
         if(output.isEmpty()){
             return "No se encontraron usuarios";
@@ -38,6 +39,7 @@ public class UsuarioRepository {
                 output += "Nombre del usuario: " + temp.getNombre() + "\n";
                 output += "password del usuario: " + temp.getPassword() + "\n";
                 output += "email del usuario: " + temp.getEmail() + "\n";
+                output += "direccion del usuario: " + temp.getDireccion() + "\n";
                 return output;
             }
         }
