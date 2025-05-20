@@ -18,7 +18,7 @@ public class TiendaController {
         return tiendaService.getAllTiendas();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public String getTiendaById(@PathVariable int id){
         return tiendaService.getTiendaById(id);
     }

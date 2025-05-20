@@ -25,7 +25,7 @@ public class ProductoRepository {
             output += "Precio del producto: " + temp.getPrecio() + "\n";
         }
         if(output.isEmpty()){
-            return "No existe el producto con id: "+id;
+            return "No existe el producto con id: ";
         }
         else{
             return output;

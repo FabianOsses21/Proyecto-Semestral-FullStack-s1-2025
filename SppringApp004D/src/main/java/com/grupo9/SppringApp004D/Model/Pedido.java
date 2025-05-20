@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 // Faltan que se creen las clases producto y tienda para terminar pedido
 @Data
 @AllArgsConstructor
@@ -14,4 +16,6 @@ public class Pedido {
     private int estado;
     private String fecha;
     private int idUsuario;
+
+    private List<DetallePedido> detalles;
 }
