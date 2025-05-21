@@ -2,13 +2,12 @@ package com.grupo9.SppringApp004D.Controller;
 
 
 import com.grupo9.SppringApp004D.Model.Trabajador;
-import com.grupo9.SppringApp004D.Repository.TrabajadorRepository;
 import com.grupo9.SppringApp004D.Service.TrabajadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/trabajador")
+@RequestMapping("/trabajador")
 public class TrabajadorController {
 
     @Autowired
