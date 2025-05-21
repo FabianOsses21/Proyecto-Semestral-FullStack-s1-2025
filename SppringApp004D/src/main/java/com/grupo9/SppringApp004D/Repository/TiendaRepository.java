@@ -25,7 +25,7 @@ public class TiendaRepository {
             output += "Comuna: " + temp.getComuna() + "\n";
         }
         if(output.isEmpty()){
-            return "No hay tiendas encontradas con la id: "+id;
+            return "No se encontraron tiendas";
         }
         else{
             return output;

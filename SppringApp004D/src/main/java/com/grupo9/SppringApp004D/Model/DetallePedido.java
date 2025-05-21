@@ -1,6 +1,5 @@
 package com.grupo9.SppringApp004D.Model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
-    private int id;
-    private String nombre;
-    private String password;
-    private String email;
-    private String direccion;
+// Clase Auxiliar para tener cantidad de cada producto de un pedido
+public class DetallePedido {
+    int idPedido;
+    Producto producto;
+    int cantidad;
 }

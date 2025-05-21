@@ -15,7 +15,8 @@ public class PedidoRepository {
         String output = " ";
         for (Pedido temp: listaPedidos) {
             output += "Id del pedido: " + temp.getId() + "\n";
-            output += "Total del pedido: " + temp.getTotal() + "\n";
+            output += "Lista de productos: " + temp.getProductos() + "\n";
+            output += "Total del pedido: " + temp.calcularTotal() + "\n";
             output += "Estado del pedido: " + temp.getEstado() + "\n";
             output += "Fecha del pedido: " + temp.getFecha() + "\n";
             output += "Id del usuario: " + temp.getIdUsuario() + "\n";
@@ -24,7 +25,7 @@ public class PedidoRepository {
             return output;
 
         }else {
-            return "No existe el pedido";
+            return "No existen pedidos";
         }
     }
     public String getPedido(int id) {
@@ -32,7 +33,8 @@ public class PedidoRepository {
         for (Pedido temp: listaPedidos) {
             if (temp.getId() == id) {
                 output = "Id del pedido: " + temp.getId() + "\n";
-                output += "Total del pedido: " + temp.getTotal() + "\n";
+                output += "Lista de productos: " + temp.getProductos() + "\n";
+                output += "Total del pedido: " + temp.calcularTotal() + "\n";
                 output += "Estado del pedido: " + temp.getEstado() + "\n";
                 output += "Fecha del pedido: " + temp.getFecha() + "\n";
                 output += "Id del usuario: " + temp.getIdUsuario() + "\n";

@@ -27,7 +27,7 @@ public class TrabajadorRepository {
             output += "Tienda del trabajador: " + temp.getTienda() + "\n";
         }
         if(output.isEmpty()){
-            return "No se encontro el trabajador";
+            return "No se encontraron trabajadores";
         }
         else{
             return output;

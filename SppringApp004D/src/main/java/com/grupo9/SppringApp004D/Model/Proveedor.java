@@ -1,17 +1,18 @@
 package com.grupo9.SppringApp004D.Model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+@AllArgsConstructor
+
+public class Proveedor {
     private int id;
-    private String nombre;
-    private String password;
-    private String email;
-    private String direccion;
+    private String ProveNombre;
+    private String ProveEmail;
+    private String producto;
+    private int TiendaNombre;
 }
