@@ -6,6 +6,9 @@ import com.grupo9.SppringApp004D.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/*
+    Pasar el codigo de repositorio a Service, corta.
+ */
 @Service
 public class UsuarioService {
 
