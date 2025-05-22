@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Pasar codigo a Service, Pasarlo a interface y extends JpaRepository<Usuario,Integer>
 @Repository
 public class UsuarioRepository {
 

@@ -8,6 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+// Pasarlo a @Entity
+/*
+arriba de id:
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+ */
 public class Usuario {
     private int id;
     private String nombre;
