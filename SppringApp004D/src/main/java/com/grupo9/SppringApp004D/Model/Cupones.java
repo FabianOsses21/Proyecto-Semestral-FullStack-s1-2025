@@ -12,8 +12,9 @@ import java.util.Date;
 
 public class Cupones {
     private int idCupon;
-    private String producto;
-    private int descuento;
+    private String descripcion;
+    //Es Decimal, valores entre 0 y 1
+    private double descuento;
     private Date fechaValida;
 }
     
