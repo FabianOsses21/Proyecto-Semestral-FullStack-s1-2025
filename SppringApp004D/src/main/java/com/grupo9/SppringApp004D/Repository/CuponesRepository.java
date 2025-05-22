@@ -19,7 +19,7 @@ public class CuponesRepository {
         String output = " ";
         for (Cupones temp: cupones){
             output += output + ("Id del cupon" + temp.getIdCupon() + "\n");
-            output += "Cupon" + temp.getProducto() + "\n";
+            output += "Descripcion" + temp.getDescripcion() + "\n";
             output += "Cantidad de descuento" + temp.getDescuento() + "\n";
             output += "Fecha valida del cupon" + temp.getFechaValida() + "\n";
         }
@@ -35,7 +35,7 @@ public class CuponesRepository {
         for (Cupones temp: cupones){
             if(temp.getIdCupon() == id){
                 output += "Id del cupon" + temp.getIdCupon() + "\n";
-                output += "Cupon" + temp.getProducto() + "\n";
+                output += "Descripcion" + temp.getDescripcion() + "\n";
                 output += "Cantidad de descuento" + temp.getDescuento() + "\n";
                 output += "Fecha valida del cupon" + temp.getFechaValida() + "\n";
                 return output;

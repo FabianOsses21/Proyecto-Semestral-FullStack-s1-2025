@@ -17,26 +17,30 @@ public class Pedido {
     private int estado;
     private String fecha;
     private int idUsuario;
+    private Cupones cupon;
 
+    //Ahora si se pasa null como parametro, no se aplica cupón, si se pasa uno se aplica.
     public int calcularTotal() {
         int total = 0;
         for (DetallePedido detallePedido : productos) {
             total += detallePedido.getProducto().getPrecio() * detallePedido.getCantidad();
         }
-        //Este IF va a cambiar cuando la clase cupon este lista, usara el metodo de abajo
-        if (total > 1000) {
-            total = (int) (total * 0.9);
+        if (aplicaCupon()) {
+            total = Math.toIntExact(Math.round(total * (1-getCupon().getDescuento())));
         }
         return total;
     }
 
-/*
-    public boolean AplicaCupon(Cupon cupon){
-        if (cupon.getEstado == "activo"){
-            return true;
-        }else{
+    public boolean aplicaCupon() {
+        java.util.Date hoy = new java.util.Date();
+        if (getCupon() == null) {
             return false;
+        }else{
+            if (hoy.before(getCupon().getFechaValida()) || hoy.equals(getCupon().getFechaValida())) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-*/
 }
