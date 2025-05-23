@@ -21,15 +21,15 @@ public class ReclamoController {
     }
     @GetMapping("/usuario/{idUsuario}")
     public String getReclamoByUsuario(@PathVariable int idUsuario) {
-        return reclamoService.getReclamoByUsuario(idUsuario);
+        return reclamoService.getReclamosByIdUsuario(idUsuario);
     }
     @GetMapping("/estado/{estado}")
     public String getReclamoByEstado(@PathVariable String estado) {
-        return reclamoService.getReclamoByEstado(estado);
+        return reclamoService.getReclamosByEstado(estado);
     }
     @GetMapping("/usuario/{idUsuario}/estado/{estado}")
     public String getReclamoByUsuarioAndEstado(@PathVariable int idUsuario, @PathVariable String estado) {
-        return reclamoService.getReclamoByUsuarioAndEstado(idUsuario, estado);
+        return reclamoService.getReclamosByIdUsuarioAndEstado(idUsuario, estado);
     }
     @PostMapping
     public String addReclamo(@RequestBody Reclamo reclamo) {

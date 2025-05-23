@@ -15,29 +15,29 @@ public class ReseniaController {
     public String getAllResenias() {
         return reseniaService.getAllResenias();
     }
-    @GetMapping("/{idProducto}/{idUsuario}")
-    public String getResenia(@PathVariable int idProducto, int idUsuario) {
-        return reseniaService.getResenia(idProducto, idUsuario);
+    @GetMapping("/{id}")
+    public String getResenia(@PathVariable int id) {
+        return reseniaService.getResenia(id);
     }
     @GetMapping("/producto/{idProducto}")
     public String getReseniaByProducto(@PathVariable int idProducto) {
-        return reseniaService.getReseniaByProducto(idProducto);
+        return reseniaService.getReseniasByIdProducto(idProducto);
     }
     @GetMapping("/usuario/{idUsuario}")
     public String getReseniaByUsuario(@PathVariable int idUsuario) {
-        return reseniaService.getReseniaByUsuario(idUsuario);
+        return reseniaService.getReseniasByIdUsuario(idUsuario);
     }
     @PostMapping
     public String addResenia(@RequestBody Resenia resenia) {
         return reseniaService.addResenia(resenia);
     }
-    @PutMapping("/{idProducto}/{idUsuario}")
-    public String updateResenia(@PathVariable int idProducto, @PathVariable int idUsuario, @RequestBody Resenia resenia) {
-        return reseniaService.updateResenia(idProducto, idUsuario, resenia);
+    @PutMapping("/{id}")
+    public String updateResenia(@PathVariable int id, @RequestBody Resenia resenia) {
+        return reseniaService.updateResenia(id, resenia);
     }
-    @DeleteMapping("/{idProducto}/{idUsuario}")
-    public String deleteResenia(@PathVariable int idProducto, @PathVariable int idUsuario) {
-        return reseniaService.deleteResenia(idProducto, idUsuario);
+    @DeleteMapping("/{id}")
+    public String deleteResenia(@PathVariable int id) {
+        return reseniaService.deleteResenia(id);
     }
 
 

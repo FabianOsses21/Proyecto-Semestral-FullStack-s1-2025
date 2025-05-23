@@ -20,7 +20,7 @@ public class CuponesController {
 
     @GetMapping("/{id}")
     public String getCuponById(@PathVariable int id){
-        return cuponesService.getCuponesById(id);
+        return cuponesService.getCupon(id);
     }
 
     @PostMapping
@@ -30,12 +30,12 @@ public class CuponesController {
 
     @DeleteMapping("/{id}")
     public String deleteCuponById(@PathVariable int id){
-        return cuponesService.deleteCupones(id);
+        return cuponesService.removeCupones(id);
     }
 
     @PutMapping("/{id}")
     public String updateCupon(@PathVariable int id, @RequestBody Cupones cupones){
-        return cuponesService.updateCupon(id, cupones);
+        return cuponesService.updateCupones(id, cupones);
     }
 
 }

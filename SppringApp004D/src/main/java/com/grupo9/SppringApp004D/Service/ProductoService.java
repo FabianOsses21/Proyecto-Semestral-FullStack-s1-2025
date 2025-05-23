@@ -12,24 +12,60 @@ public class ProductoService {
     @Autowired
     ProductoRepository productoRepository;
 
-    public String addProducto(Producto producto){
-        return productoRepository.addProducto(producto);
+    public String getAllProductos() {
+        String output = "";
+        for (Producto temp: productoRepository.findAll()) {
+            output += "Id del producto: " + temp.getId() + "\n";
+            output += "Nombre del producto: " + temp.getNombre() + "\n";
+            output += "Descripcion del producto: " + temp.getDescripcion() + "\n";
+            output += "Precio del producto: " + temp.getPrecio() + "\n";
+        }
+        if (output.isEmpty()) {
+            return "No existen productos";
+        } else {
+            return output;
+        }
     }
 
-    public String deleteProducto(int id){
-        productoRepository.removeProducto(id);
-        return "Producto eliminado con exito";
+    public String getProducto(int id) {
+        String output = "";
+        if (productoRepository.existsById(id)) {
+            Producto buscado = productoRepository.findById(id).get();
+            output += "Id del producto: " + buscado.getId() + "\n";
+            output += "Nombre del producto: " + buscado.getNombre() + "\n";
+            output += "Descripcion del producto: " + buscado.getDescripcion() + "\n";
+            output += "Precio del producto: " + buscado.getPrecio() + "\n";
+            return output;
+        } else {
+            return "No existe el producto con id: " + id;
+        }
     }
 
-    public String getAllProductos(){
-        return productoRepository.getAllProductos();
+    public String addProducto(Producto producto) {
+        productoRepository.save(producto);
+        return "Producto agregado correctamente";
     }
 
-    public String getProductoById(int id){
-        return productoRepository.getProducto(id);
+    public String removeProducto(int id) {
+        if (productoRepository.existsById(id)) {
+            Producto buscado = productoRepository.findById(id).get();
+            productoRepository.delete(buscado);
+            return "Producto eliminado correctamente";
+        } else {
+            return "No existe el producto con id: " + id;
+        }
     }
 
-    public String updateProducto(int id, Producto producto){
-        return productoRepository.updateProducto(id, producto);
+    public String updateProducto(int id, Producto producto) {
+        if (productoRepository.existsById(id)) {
+            Producto buscado = productoRepository.findById(id).get();
+            buscado.setNombre(producto.getNombre());
+            buscado.setDescripcion(producto.getDescripcion());
+            buscado.setPrecio(producto.getPrecio());
+            productoRepository.save(buscado);
+            return "Producto actualizado correctamente";
+        } else {
+            return "No existe el producto con id: " + id;
+        }
     }
 }

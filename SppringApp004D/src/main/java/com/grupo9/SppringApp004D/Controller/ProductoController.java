@@ -18,9 +18,9 @@ public class ProductoController {
         return productoService.getAllProductos();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public String getProductosById(@PathVariable int id){
-        return productoService.getProductoById(id);
+        return productoService.getProducto(id);
     }
 
     @PostMapping
@@ -30,7 +30,7 @@ public class ProductoController {
 
     @DeleteMapping("/{id}")
     public String deleteProductoById(@PathVariable int id){
-        return productoService.deleteProducto(id);
+        return productoService.removeProducto(id);
     }
 
     @PutMapping("/{id}")
