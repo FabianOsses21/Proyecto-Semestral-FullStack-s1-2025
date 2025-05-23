@@ -1,20 +1,26 @@
 package com.grupo9.SppringApp004D.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
 
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
 
+@Entity
 public class Cupones {
-    private int idCupon;
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private int id;
+
     private String descripcion;
     //Es Decimal, valores entre 0 y 1
     private double descuento;
-    private Date fechaValida;
+    private java.time.LocalDate fechaValida;
 }
     

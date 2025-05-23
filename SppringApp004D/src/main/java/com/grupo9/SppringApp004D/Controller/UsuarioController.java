@@ -22,7 +22,7 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public String getUserById(@PathVariable int id){
 
-        return usuarioService.getUserById(id);
+        return usuarioService.getUsuario(id);
     }
 
     @PostMapping
@@ -34,7 +34,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public String deleteUserById(@PathVariable int id){
 
-        return usuarioService.deleteUsuario(id);
+        return usuarioService.removeUsuario(id);
     }
 
     @PutMapping("/{id}")

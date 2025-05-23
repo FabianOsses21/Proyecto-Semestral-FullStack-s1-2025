@@ -20,7 +20,7 @@ public class ProveedorController {
 
     @GetMapping("/{id}")
     public String getProveedorById(@PathVariable int id){
-        return proveedorService.getProveedorById(id);
+        return proveedorService.getProveedor(id);
     }
 
     @PostMapping
@@ -30,7 +30,7 @@ public class ProveedorController {
 
     @DeleteMapping("/{id}")
     public String deleteProveedorById(@PathVariable int id){
-        return proveedorService.deleteProveedor(id);
+        return proveedorService.removeProveedor(id);
 
     }
 

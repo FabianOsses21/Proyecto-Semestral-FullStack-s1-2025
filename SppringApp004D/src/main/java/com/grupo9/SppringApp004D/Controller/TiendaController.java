@@ -18,9 +18,9 @@ public class TiendaController {
         return tiendaService.getAllTiendas();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public String getTiendaById(@PathVariable int id){
-        return tiendaService.getTiendaById(id);
+        return tiendaService.getTienda(id);
     }
 
     @PostMapping
@@ -30,7 +30,7 @@ public class TiendaController {
 
     @DeleteMapping("/{id}")
     public String deleteTienda(@PathVariable int id){
-        return tiendaService.deleteTienda(id);
+        return tiendaService.removeTienda(id);
     }
 
     @PutMapping("/{id}")

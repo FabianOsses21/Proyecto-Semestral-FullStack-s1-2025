@@ -10,28 +10,109 @@ public class ReclamoService {
     @Autowired
     private ReclamoRepository reclamoRepository;
 
-    public String getAllReclamos() {
-        return reclamoRepository.getAllReclamos();
+    public String getAllReclamos(){
+        String output = "";
+        for (Reclamo temp: reclamoRepository.findAll()) {
+            output += "Id del reclamo: " + temp.getId() + "\n";
+            output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
+            output += "Descripcion: " + temp.getDescripcion() + "\n";
+            output += "Fecha: " + temp.getFecha() + "\n";
+            output += "Estado: " + temp.getEstado() + "\n";
+        }
+        if (output.isEmpty()) {
+            return "No existen reclamos";
+        } else {
+            return output;
+        }
     }
-    public String getReclamo(int id) {
-        return reclamoRepository.getReclamo(id);
+    public String getReclamo(int id){
+        String output ="";
+        if (reclamoRepository.existsById(id)) {
+            Reclamo buscado = reclamoRepository.findById(id).get();
+            output += "Id del reclamo: " + buscado.getId() + "\n";
+            output += "Id del usuario: " + buscado.getUsuario().getId() + "\n";
+            output += "Descripcion: " + buscado.getDescripcion() + "\n";
+            output += "Fecha: " + buscado.getFecha() + "\n";
+            output += "Estado: " + buscado.getEstado() + "\n";
+            return output;
+        } else {
+            return "No existe el reclamo con id: "+id;
+        }
     }
     public String addReclamo(Reclamo reclamo) {
-        return reclamoRepository.addReclamo(reclamo);
+        reclamoRepository.save(reclamo);
+        return "Reclamo añadido con éxito";
     }
     public String updateReclamo(int id, Reclamo reclamo) {
-        return reclamoRepository.updateReclamo(id, reclamo);
+        if (reclamoRepository.existsById(id)) {
+            Reclamo buscado = reclamoRepository.findById(id).get();
+            buscado.setDescripcion(reclamo.getDescripcion());
+            buscado.setEstado(reclamo.getEstado());
+            reclamoRepository.save(buscado);
+            return "Reclamo actualizado con éxito";
+        } else {
+            return "No se encontró el reclamo con id: "+id;
+        }
     }
-    public String deleteReclamo(int id) {
-        return reclamoRepository.deleteReclamo(id);
+    public String deleteReclamo(int id){
+        if (reclamoRepository.existsById(id)) {
+            Reclamo buscado = reclamoRepository.findById(id).get();
+            reclamoRepository.delete(buscado);
+            return "Reclamo eliminado con éxito";
+        } else {
+            return "No se encontró el reclamo con id: "+id;
+        }
     }
-    public String getReclamoByUsuario(int idUsuario) {
-        return reclamoRepository.getReclamosByIdUsuario(idUsuario);
+    public String getReclamosByIdUsuario(int idUsuario){
+        String output = "";
+        for (Reclamo temp: reclamoRepository.findAll()) {
+            if (temp.getUsuario().getId() == idUsuario) {
+                output += "Id del reclamo: " + temp.getId() + "\n";
+                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
+                output += "Descripcion: " + temp.getDescripcion() + "\n";
+                output += "Fecha: " + temp.getFecha() + "\n";
+                output += "Estado: " + temp.getEstado() + "\n";
+            }
+        }
+        if (!output.isEmpty()){
+            return output;
+
+        }else {
+            return "No se encontraron reclamos para el usuario con id: "+idUsuario;
+        }
     }
-    public String getReclamoByEstado(String estado) {
-        return reclamoRepository.getReclamosByEstado(estado);
+    public String getReclamosByEstado(String estado){
+        String output = "";
+        for (Reclamo temp: reclamoRepository.findAll()) {
+            if (temp.getEstado().equals(estado)) {
+                output += "Id del reclamo: " + temp.getId() + "\n";
+                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
+                output += "Descripcion: " + temp.getDescripcion() + "\n";
+                output += "Fecha: " + temp.getFecha() + "\n";
+                output += "Estado: " + temp.getEstado() + "\n";
+            }
+        }
+        if (!output.isEmpty()){
+            return output;
+        }else {
+            return "No se encontraron reclamos con el estado: "+estado;
+        }
     }
-    public String getReclamoByUsuarioAndEstado(int idUsuario, String estado) {
-        return reclamoRepository.getReclamosByIdUsuarioAndEstado(idUsuario, estado);
+    public String getReclamosByIdUsuarioAndEstado(int idUsuario, String estado){
+        String output = "";
+        for (Reclamo temp: reclamoRepository.findAll()) {
+            if (temp.getUsuario().getId() == idUsuario && temp.getEstado().equals(estado)) {
+                output += "Id del reclamo: " + temp.getId() + "\n";
+                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
+                output += "Descripcion: " + temp.getDescripcion() + "\n";
+                output += "Fecha: " + temp.getFecha() + "\n";
+                output += "Estado: " + temp.getEstado() + "\n";
+            }
+        }
+        if (!output.isEmpty()){
+            return output;
+        }else {
+            return "No se encontraron reclamos para el usuario con id: "+idUsuario+" y estado: "+estado;
+        }
     }
 }

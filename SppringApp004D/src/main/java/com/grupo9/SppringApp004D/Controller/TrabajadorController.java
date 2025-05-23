@@ -20,7 +20,7 @@ public class TrabajadorController {
 
     @GetMapping("/{id}")
     public String getTrabajadorById(@PathVariable int id){
-        return trabajadorService.getTrabajadorById(id);
+        return trabajadorService.getTrabajador(id);
     }
 
     @PostMapping
@@ -30,7 +30,7 @@ public class TrabajadorController {
 
     @DeleteMapping("/{id}")
     public String deleteTrabajadorById(@PathVariable int id){
-        return trabajadorService.deleteTrabajador(id);
+        return trabajadorService.removeTrabajador(id);
     }
 
     @PutMapping("/{id}")

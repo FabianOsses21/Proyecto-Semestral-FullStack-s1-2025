@@ -16,9 +16,9 @@ public class InventarioController {
         return inventarioService.getAllInventario();
     }
 
-    @GetMapping("/{idProducto}/{idTienda}")
-    public String getInventario(@PathVariable int idProducto, @PathVariable int idTienda) {
-        return inventarioService.getInventario(idProducto, idTienda);
+    @GetMapping("/{id}")
+    public String getInventario(@PathVariable int id) {
+        return inventarioService.getInventario(id);
     }
 
     @GetMapping("/tienda/{idTienda}")
@@ -35,14 +35,14 @@ public class InventarioController {
         return inventarioService.addInventario(inventario);
     }
 
-    @PutMapping("/{idProducto}/{idTienda}")
-    public String updateInventario(@PathVariable int idProducto, @PathVariable int idTienda, @RequestBody Inventario inventario) {
-        return inventarioService.updateInventario(idProducto, idTienda, inventario);
+    @PutMapping("/{id}")
+    public String updateInventario(@PathVariable int id, @RequestBody Inventario inventario) {
+        return inventarioService.updateInventario(id, inventario);
     }
 
-    @DeleteMapping("/{idProducto}/{idTienda}")
-    public String deleteInventario(@PathVariable int idProducto, @PathVariable int idTienda) {
-        return inventarioService.deleteInventario(idProducto, idTienda);
+    @DeleteMapping("/{id}")
+    public String deleteInventario(@PathVariable int id) {
+        return inventarioService.deleteInventario(id);
     }
 
 }
