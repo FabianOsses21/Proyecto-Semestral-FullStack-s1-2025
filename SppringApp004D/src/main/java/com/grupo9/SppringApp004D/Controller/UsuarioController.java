@@ -76,7 +76,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @Operation(summary="Eliminar Usuario por ID",description = "Elimina un usuario segun el ID registrado en el sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Retorna Usuario"),
+            @ApiResponse(responseCode = "200",description = "Usuario Eliminado"),
             @ApiResponse(responseCode = "404",description = "No se encuentran datos")
     })
     @Parameter(description = "El ID del usuario", example = "123")
