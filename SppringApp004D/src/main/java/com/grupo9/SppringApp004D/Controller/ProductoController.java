@@ -2,7 +2,6 @@ package com.grupo9.SppringApp004D.Controller;
 
 
 import com.grupo9.SppringApp004D.Model.Producto;
-import com.grupo9.SppringApp004D.Model.Usuario;
 import com.grupo9.SppringApp004D.Service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

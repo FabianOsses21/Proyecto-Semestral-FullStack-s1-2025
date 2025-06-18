@@ -2,7 +2,6 @@ package com.grupo9.SppringApp004D.Controller;
 
 
 import com.grupo9.SppringApp004D.Model.Trabajador;
-import com.grupo9.SppringApp004D.Model.Usuario;
 import com.grupo9.SppringApp004D.Service.TrabajadorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -30,7 +29,7 @@ public class TrabajadorController {
             @ApiResponse(responseCode = "200",description = "Retorna lista completa de trabajadores"),
             @ApiResponse(responseCode = "404",description = "No se encuentran datos")
     })
-    public ResponseEntity<List<Trabajador>> getAllUsuarios(){
+    public ResponseEntity<List<Trabajador>> getAllTrabajadores(){
         List<Trabajador> lista = trabajadorService.getAllTrabajadores();
         if(lista.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

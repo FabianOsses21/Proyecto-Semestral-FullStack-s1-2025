@@ -2,7 +2,6 @@ package com.grupo9.SppringApp004D.Service;
 
 
 import com.grupo9.SppringApp004D.Model.Trabajador;
-import com.grupo9.SppringApp004D.Model.Usuario;
 import com.grupo9.SppringApp004D.Repository.TrabajadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class TrabajadorService {
         return trabajadorRepository.findById(id).get();
     }
 
-    //Agregar usuario
     public Trabajador addTrabajador(Trabajador trabajador) {
         return trabajadorRepository.save(trabajador);
     }

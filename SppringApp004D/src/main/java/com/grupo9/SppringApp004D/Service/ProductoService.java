@@ -2,7 +2,6 @@ package com.grupo9.SppringApp004D.Service;
 
 
 import com.grupo9.SppringApp004D.Model.Producto;
-import com.grupo9.SppringApp004D.Model.Usuario;
 import com.grupo9.SppringApp004D.Repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
