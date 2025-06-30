@@ -6,66 +6,35 @@ import com.grupo9.SppringApp004D.Repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoService {
 
     @Autowired
     ProductoRepository productoRepository;
 
-    public String getAllProductos() {
-        String output = "";
-        for (Producto temp: productoRepository.findAll()) {
-            output += "Id del producto: " + temp.getId() + "\n";
-            output += "Nombre del producto: " + temp.getNombre() + "\n";
-            output += "Descripcion del producto: " + temp.getDescripcion() + "\n";
-            output += "Precio del producto: " + temp.getPrecio() + "\n";
-        }
-        if (output.isEmpty()) {
-            return "No existen productos";
-        } else {
-            return output;
-        }
+    public List<Producto> getAllProductos() {
+        return productoRepository.findAll();
     }
 
-    public String getProducto(int id) {
-        String output = "";
-        if (productoRepository.existsById(id)) {
-            Producto buscado = productoRepository.findById(id).get();
-            output += "Id del producto: " + buscado.getId() + "\n";
-            output += "Nombre del producto: " + buscado.getNombre() + "\n";
-            output += "Descripcion del producto: " + buscado.getDescripcion() + "\n";
-            output += "Precio del producto: " + buscado.getPrecio() + "\n";
-            return output;
-        } else {
-            return "No existe el producto con id: " + id;
-        }
+    public Producto getProducto(int id) {
+        return productoRepository.findById(id).get();
     }
 
-    public String addProducto(Producto producto) {
-        productoRepository.save(producto);
-        return "Producto agregado correctamente";
+    public Producto addProducto(Producto producto) {
+        return productoRepository.save(producto);
     }
 
-    public String removeProducto(int id) {
-        if (productoRepository.existsById(id)) {
-            Producto buscado = productoRepository.findById(id).get();
-            productoRepository.delete(buscado);
-            return "Producto eliminado correctamente";
-        } else {
-            return "No existe el producto con id: " + id;
-        }
+    public void removeProducto(int id) {
+        productoRepository.deleteById(id);
     }
 
-    public String updateProducto(int id, Producto producto) {
-        if (productoRepository.existsById(id)) {
-            Producto buscado = productoRepository.findById(id).get();
-            buscado.setNombre(producto.getNombre());
-            buscado.setDescripcion(producto.getDescripcion());
-            buscado.setPrecio(producto.getPrecio());
-            productoRepository.save(buscado);
-            return "Producto actualizado correctamente";
-        } else {
-            return "No existe el producto con id: " + id;
-        }
+    public Producto updateProducto(int id, Producto producto) {
+        Producto pr =  productoRepository.findById(id).get();
+        pr.setNombre(producto.getNombre());
+        pr.setPrecio(producto.getPrecio());
+        productoRepository.save(pr);
+        return pr;
     }
 }
