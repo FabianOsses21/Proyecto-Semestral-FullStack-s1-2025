@@ -1,7 +1,12 @@
 package com.grupo9.SppringApp004D.Service;
 
+import com.grupo9.SppringApp004D.Model.Cupones;
 import com.grupo9.SppringApp004D.Model.Reclamo;
+import com.grupo9.SppringApp004D.Repository.CuponesRepository;
 import com.grupo9.SppringApp004D.Repository.ReclamoRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,109 +15,38 @@ public class ReclamoService {
     @Autowired
     private ReclamoRepository reclamoRepository;
 
-    public String getAllReclamos(){
-        String output = "";
-        for (Reclamo temp: reclamoRepository.findAll()) {
-            output += "Id del reclamo: " + temp.getId() + "\n";
-            output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
-            output += "Descripcion: " + temp.getDescripcion() + "\n";
-            output += "Fecha: " + temp.getFecha() + "\n";
-            output += "Estado: " + temp.getEstado() + "\n";
-        }
-        if (output.isEmpty()) {
-            return "No existen reclamos";
-        } else {
-            return output;
-        }
+    public List<Reclamo> getAllReclamos() {
+        return reclamoRepository.findAll();
     }
-    public String getReclamo(int id){
-        String output ="";
-        if (reclamoRepository.existsById(id)) {
-            Reclamo buscado = reclamoRepository.findById(id).get();
-            output += "Id del reclamo: " + buscado.getId() + "\n";
-            output += "Id del usuario: " + buscado.getUsuario().getId() + "\n";
-            output += "Descripcion: " + buscado.getDescripcion() + "\n";
-            output += "Fecha: " + buscado.getFecha() + "\n";
-            output += "Estado: " + buscado.getEstado() + "\n";
-            return output;
-        } else {
-            return "No existe el reclamo con id: "+id;
-        }
-    }
-    public String addReclamo(Reclamo reclamo) {
-        reclamoRepository.save(reclamo);
-        return "Reclamo añadido con éxito";
-    }
-    public String updateReclamo(int id, Reclamo reclamo) {
-        if (reclamoRepository.existsById(id)) {
-            Reclamo buscado = reclamoRepository.findById(id).get();
-            buscado.setDescripcion(reclamo.getDescripcion());
-            buscado.setEstado(reclamo.getEstado());
-            reclamoRepository.save(buscado);
-            return "Reclamo actualizado con éxito";
-        } else {
-            return "No se encontró el reclamo con id: "+id;
-        }
-    }
-    public String deleteReclamo(int id){
-        if (reclamoRepository.existsById(id)) {
-            Reclamo buscado = reclamoRepository.findById(id).get();
-            reclamoRepository.delete(buscado);
-            return "Reclamo eliminado con éxito";
-        } else {
-            return "No se encontró el reclamo con id: "+id;
-        }
-    }
-    public String getReclamosByIdUsuario(int idUsuario){
-        String output = "";
-        for (Reclamo temp: reclamoRepository.findAll()) {
-            if (temp.getUsuario().getId() == idUsuario) {
-                output += "Id del reclamo: " + temp.getId() + "\n";
-                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
-                output += "Descripcion: " + temp.getDescripcion() + "\n";
-                output += "Fecha: " + temp.getFecha() + "\n";
-                output += "Estado: " + temp.getEstado() + "\n";
-            }
-        }
-        if (!output.isEmpty()){
-            return output;
 
-        }else {
-            return "No se encontraron reclamos para el usuario con id: "+idUsuario;
-        }
+    public Reclamo getReclamo(int id) {
+        return reclamoRepository.findById(id).get();
     }
-    public String getReclamosByEstado(String estado){
-        String output = "";
-        for (Reclamo temp: reclamoRepository.findAll()) {
-            if (temp.getEstado().equals(estado)) {
-                output += "Id del reclamo: " + temp.getId() + "\n";
-                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
-                output += "Descripcion: " + temp.getDescripcion() + "\n";
-                output += "Fecha: " + temp.getFecha() + "\n";
-                output += "Estado: " + temp.getEstado() + "\n";
-            }
-        }
-        if (!output.isEmpty()){
-            return output;
-        }else {
-            return "No se encontraron reclamos con el estado: "+estado;
-        }
+
+    public Reclamo addReclamo(Reclamo reclamo) {
+        return reclamoRepository.save(reclamo);
     }
-    public String getReclamosByIdUsuarioAndEstado(int idUsuario, String estado){
-        String output = "";
-        for (Reclamo temp: reclamoRepository.findAll()) {
-            if (temp.getUsuario().getId() == idUsuario && temp.getEstado().equals(estado)) {
-                output += "Id del reclamo: " + temp.getId() + "\n";
-                output += "Id del usuario: " + temp.getUsuario().getId() + "\n";
-                output += "Descripcion: " + temp.getDescripcion() + "\n";
-                output += "Fecha: " + temp.getFecha() + "\n";
-                output += "Estado: " + temp.getEstado() + "\n";
-            }
-        }
-        if (!output.isEmpty()){
-            return output;
-        }else {
-            return "No se encontraron reclamos para el usuario con id: "+idUsuario+" y estado: "+estado;
-        }
+
+    public Reclamo getReclamos(int id) {
+        return reclamoRepository.findById(id).get();
+    }
+
+    public Reclamo addReclamos(Reclamo reclamo) {
+        return reclamoRepository.save(reclamo);
+    }
+
+    public void removeReclamos(int id) {
+        reclamoRepository.deleteById(id);
+    }
+
+    public Reclamo updateReclamos(int id, Reclamo reclamo) {
+        Reclamo tr =  reclamoRepository.findById(id).get();
+        tr.setId(reclamo.getId());
+        tr.setDescripcion(reclamo.getDescripcion());
+        tr.setEstado(reclamo.getEstado());
+        tr.setFecha(reclamo.getFecha());
+        tr.setUsuario(reclamo.getUsuario());
+        return reclamoRepository.save(tr);
     }
 }
+
