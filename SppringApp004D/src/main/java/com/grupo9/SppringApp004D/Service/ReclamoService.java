@@ -1,52 +1,61 @@
 package com.grupo9.SppringApp004D.Service;
 
-import com.grupo9.SppringApp004D.Model.Cupones;
 import com.grupo9.SppringApp004D.Model.Reclamo;
-import com.grupo9.SppringApp004D.Repository.CuponesRepository;
 import com.grupo9.SppringApp004D.Repository.ReclamoRepository;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class ReclamoService {
     @Autowired
-    private ReclamoRepository reclamoRepository;
+    ReclamoRepository reclamoRepository;
 
     public List<Reclamo> getAllReclamos() {
         return reclamoRepository.findAll();
     }
 
     public Reclamo getReclamo(int id) {
-        return reclamoRepository.findById(id).get();
+        return reclamoRepository.findById(id).orElse(null);
     }
 
     public Reclamo addReclamo(Reclamo reclamo) {
         return reclamoRepository.save(reclamo);
     }
 
-    public Reclamo getReclamos(int id) {
-        return reclamoRepository.findById(id).get();
-    }
-
-    public Reclamo addReclamos(Reclamo reclamo) {
-        return reclamoRepository.save(reclamo);
-    }
-
-    public void removeReclamos(int id) {
+    public void removeReclamo(int id) {
         reclamoRepository.deleteById(id);
     }
 
-    public Reclamo updateReclamos(int id, Reclamo reclamo) {
-        Reclamo tr =  reclamoRepository.findById(id).get();
-        tr.setId(reclamo.getId());
-        tr.setDescripcion(reclamo.getDescripcion());
-        tr.setEstado(reclamo.getEstado());
-        tr.setFecha(reclamo.getFecha());
-        tr.setUsuario(reclamo.getUsuario());
-        return reclamoRepository.save(tr);
+    public Reclamo updateReclamo(int id, Reclamo reclamo) {
+        Reclamo re = reclamoRepository.findById(id).orElse(null);
+        if (re != null) {
+            re.setDescripcion(reclamo.getDescripcion());
+            re.setEstado(reclamo.getEstado());
+            re.setUsuario(reclamo.getUsuario());
+            reclamoRepository.save(re);
+        }
+        return re;
+    }
+
+    public List<Reclamo> getReclamosByUsuario(int idUsuario) {
+        return reclamoRepository.findAll()
+                .stream()
+                .filter(r -> r.getUsuario().getId() == idUsuario)
+                .toList();
+    }
+
+    public List<Reclamo> getReclamosByEstado(String estado) {
+        return reclamoRepository.findAll()
+                .stream()
+                .filter(r -> r.getEstado().equalsIgnoreCase(estado))
+                .toList();
+    }
+
+    public List<Reclamo> getReclamosByUsuarioAndEstado(int idUsuario, String estado) {
+        return reclamoRepository.findAll()
+                .stream()
+                .filter(r -> r.getUsuario().getId() == idUsuario && r.getEstado().equalsIgnoreCase(estado))
+                .toList();
     }
 }
-
