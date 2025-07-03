@@ -2,13 +2,17 @@ package com.grupo9.SppringApp004D.Controller;
 
 import com.grupo9.SppringApp004D.Model.Envio;
 import com.grupo9.SppringApp004D.Service.EnvioService;
+import com.grupo9.SppringApp004D.Assembler.EnvioModelAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,89 +21,90 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/envio")
+@Tag(name = "Controlador Envio", description = "Servicio Rest para la gestión de Envios")
 public class EnvioController {
+
     @Autowired
     private EnvioService envioService;
 
+    @Autowired
+    private EnvioModelAssembler envioModelAssembler;
+
     @GetMapping
-    @Operation(summary = "Obtener Envios",description = "Obtiene la lista completa de envios registrados en sistema")
+    @Operation(summary = "Obtener Envios", description = "Obtiene la lista completa de envíos registrados en el sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Retorna lista completa de envios"),
-            @ApiResponse(responseCode = "404",description = "No se encuentran datos")
+            @ApiResponse(responseCode = "200", description = "Retorna lista completa de envíos"),
+            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
     })
-    public ResponseEntity<List<Envio>> getAllEnvios(){
+    public ResponseEntity<CollectionModel<EntityModel<Envio>>> getAllEnvios() {
         List<Envio> lista = envioService.getAllEnvios();
-        if(lista.isEmpty()){
+        if (lista.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else{
-            return new ResponseEntity<>(lista,HttpStatus.OK);
         }
+        return new ResponseEntity<>(envioModelAssembler.toCollectionModel(lista), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Obtener Envio por ID",description = "Segun un ID entregado, obtiene el envio registrado con ese ID")
+    @Operation(summary = "Obtener Envío por ID", description = "Obtiene el envío registrado con ese ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Retorna Envio"),
-            @ApiResponse(responseCode = "404",description = "No se encuentran datos")
+            @ApiResponse(responseCode = "200", description = "Retorna Envío"),
+            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
     })
-    @Parameter(description = "El ID del envio", example = "123")
-    public ResponseEntity<Envio> getEnvio(@PathVariable int id){
-        Envio en = envioService.getEnvio(id);
-        if(en!=null){
-            return new ResponseEntity<>(en,HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Parameter(description = "El ID del envío", example = "123")
+    public ResponseEntity<EntityModel<Envio>> getEnvio(@PathVariable int id) {
+        Envio envio = envioService.getEnvio(id);
+        if (envio != null) {
+            return new ResponseEntity<>(envioModelAssembler.toModel(envio), HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
-    @Operation(summary = "Agregar Envio",description = "Permite registrar un envio en el sistema")
+    @Operation(summary = "Agregar Envío", description = "Permite registrar un envío en el sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",description = "Envio creado",
+            @ApiResponse(responseCode = "201", description = "Envío creado",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Envio.class))),
-            @ApiResponse(responseCode = "204",description = "No hay contenido en la solicitud")
+            @ApiResponse(responseCode = "204", description = "No hay contenido en la solicitud")
     })
-    public ResponseEntity<Envio> addEnvio(@RequestBody Envio envio){
+    public ResponseEntity<EntityModel<Envio>> addEnvio(@RequestBody Envio envio) {
         envioService.addEnvio(envio);
-        if(envioService.getEnvio(envio.getId())!=null){
-            return new ResponseEntity<>(envio,HttpStatus.CREATED);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Envio creado = envioService.getEnvio(envio.getId());
+        if (creado != null) {
+            return new ResponseEntity<>(envioModelAssembler.toModel(creado), HttpStatus.CREATED);
         }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary="Eliminar Envio por ID",description = "Elimina un envio segun el ID registrado en el sistema")
+    @Operation(summary = "Eliminar Envío por ID", description = "Elimina un envío según el ID registrado en el sistema")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "Envio Eliminado"),
-            @ApiResponse(responseCode = "404",description = "No se encuentran datos")
+            @ApiResponse(responseCode = "200", description = "Envío eliminado"),
+            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
     })
-    @Parameter(description = "El ID del envio", example = "123")
-    public ResponseEntity<Void> deleteEnvio(@PathVariable int id){
-        if(envioService.getEnvio(id)!=null){
+    @Parameter(description = "El ID del envío", example = "123")
+    public ResponseEntity<Void> deleteEnvio(@PathVariable int id) {
+        if (envioService.getEnvio(id) != null) {
             envioService.removeEnvio(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Actualizar Envio",description = "Permite actualizar los datos de un envio segun su ID")
+    @Operation(summary = "Actualizar Envío", description = "Permite actualizar los datos de un envío según su ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",description = "Envio creado",
+            @ApiResponse(responseCode = "200", description = "Envío actualizado",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Envio.class))),
-            @ApiResponse(responseCode = "204",description = "No hay contenido en la solicitud")
+            @ApiResponse(responseCode = "404", description = "No se encuentran datos")
     })
-    @Parameter(description = "El ID del producto", example = "123")
-    public ResponseEntity<Envio> updateEnvio(@PathVariable int id,@RequestBody Envio envio){
-        if(envioService.getEnvio(id)!=null){
-            envioService.updateEnvio(id,envio);
-            return  new ResponseEntity<>(envio,HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Parameter(description = "El ID del envío", example = "123")
+    public ResponseEntity<EntityModel<Envio>> updateEnvio(@PathVariable int id, @RequestBody Envio envio) {
+        Envio actualizado = envioService.updateEnvio(id, envio);
+        if (actualizado != null) {
+            return new ResponseEntity<>(envioModelAssembler.toModel(actualizado), HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
